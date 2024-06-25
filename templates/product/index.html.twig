@@ -16,15 +16,20 @@
 		</tr>
 	</thead>
 	<tbody>
+		<a href="">ajouter un produit</a>
+
 		{% for product in products %}
 			<tr>
 				<td>{{ product.nom }}</td>
-				<td>{{ product.prixTTC }}
-					€</td>
+				<td>{{ product.prixTTC }} €</td>
 				<td>{{ product.marque }}</td>
-				<td>{{ product.poids }}
-					</td>
+				<td>{{ product.poids }}</td>
+
+				<td><a href="">éditer</a></td>
+
+				<td><a href="">supprimer</a></td>				
 			</tr>
+
 		{% endfor %}
 	</tbody>
 </table>
