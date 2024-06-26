@@ -16,7 +16,10 @@
 		</tr>
 	</thead>
 	<tbody>
-		<a href="">ajouter un produit</a>
+<a href="{{ path('produit.create') }}">ajouter un produit</a>
+
+
+
 
 		{% for product in products %}
 			<tr>
@@ -25,9 +28,17 @@
 				<td>{{ product.marque }}</td>
 				<td>{{ product.poids }}</td>
 
-				<td><a href="">éditer</a></td>
+<td>
+	<a href="{{ path('product.edit', {'id': product.id}) }}">éditer</a>
 
-				<td><a href="">supprimer</a></td>				
+{# vu qu'on ne peut pas passer la methode DELETE mais seulement POST ou GET , on va créer un formulaire avec un bouton caché #}
+<form action="{{ path('produit.delete', {id: product.id}) }}" method="post">
+<input type="hidden" name="_method" value="DELETE">
+<button type="submit">supprimer</button>
+</form>
+
+</td>
+
 			</tr>
 
 		{% endfor %}
