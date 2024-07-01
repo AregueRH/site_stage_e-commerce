@@ -51,7 +51,7 @@ class ProductController extends AbstractController
         $formulaireProd->handleRequest($request);
 
         if ($formulaireProd->isSubmitted() && $formulaireProd->isValid()) {
-                 $em->persist($produit);
+            $em->persist($produit);
             $em->flush();
             $this->addFlash('success', 'la recette a bien été créée');
             return $this->redirectToRoute('products_list');
@@ -65,7 +65,7 @@ class ProductController extends AbstractController
 
     #[Route('products/{id}/edit', name: 'produit.delete', methods: ['DELETE'])]
     public function remove(Produits $produit, EntityManagerInterface $em)
-    {
+    {   
         $em->remove($produit);
         $em->flush();
         $this->addFlash('success', 'Le produit a bien été modifié');
