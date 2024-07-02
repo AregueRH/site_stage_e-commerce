@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier mon profil
+{% endblock %}
+
+{% block body %}
+	<h1>Modifier les informations de mon profil</h1>
+
+	{{ form_start(form) }}
+
+	{{ form_row(form.username) }}
+	{{ form_row(form.email) }}
+	{{ form_row(form.plainPassword, {'label': 'Nouveau mot de passe (laisser vide si vous souhaitez conserver celui actuel)'}) }}
+    <button class="btn">Enregistrer les modifications</button>
+
+	{{ form_end(form) }}
+{% endblock %}
+
