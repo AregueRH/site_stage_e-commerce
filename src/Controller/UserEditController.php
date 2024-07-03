@@ -36,7 +36,7 @@ class UserEditController extends AbstractController
             $em->flush();
             $this->addFlash('success', 'Votre profil a été mis à jour.');
 
-            return $this->redirectToRoute('user_edit');
+            return $this->redirectToRoute('app_user_viewer');
         }
 
         return $this->render('user_edit/index.html.twig', [
