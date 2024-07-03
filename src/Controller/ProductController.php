@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Produits;
 use App\Form\ProductType;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -68,13 +67,13 @@ class ProductController extends AbstractController
         
     }
     
-    #[Route('products/{id}/edit', name: 'produit.delete', methods: ['DELETE'])]
+    #[Route('products/{id}/delete', name: 'produit.delete', methods: ['DELETE'])]
     #[IsGranted('ROLE_ADMIN')]
     public function remove(Produits $produit, EntityManagerInterface $em)
     {   
         $em->remove($produit);
         $em->flush();
-        $this->addFlash('success', 'Le produit a bien été modifié');
+        $this->addFlash('success', 'Le produit a bien été supprimé');
         return $this->redirectToRoute('products_list');
     }
 }
