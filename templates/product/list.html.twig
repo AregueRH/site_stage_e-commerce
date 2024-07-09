@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La liste des produits
+{% endblock %}
+
+{% block body %}
+
+	<h1>Liste des produits ddisponibles</h1>
+
+	{# <table class="table">
+		<thead>
+			<tr>
+				<th>Nom</th>
+				<th>Prix</th>
+				<th>Marque</th>
+				<th>Poids (kg/L)</th>
+			</tr>
+		</thead>
+		<tbody> #}
+
+{# 
+			{% for product in products %}
+				<tr>
+					<td>{{ product.nom }}</td>
+					<td>{{ product.prixTTC }}
+						€</td>
+					<td>{{ product.marque }}</td>
+					<td>{{ product.poids }}</td>
+
+					<td>
+<a href="{{ path('cart_add_item', { productId: 3 }) }}">Ajouter au panier</a> #}
+
+
+	<h1>Liste des Produits</h1>
+	<ul>
+		{% for product in products %}
+			<li>{{ product.nom }} - {{ product.prixTTC }}€</li>
+			<a href="{{ path('cart_add_item', { productId: product.id }) }}">Ajouter au panier</a>
+		{% endfor %}
+	</ul>
+
+
+
+
+						{# vu qu'on ne peut pas passer la methode DELETE mais seulement POST ou GET , on va créer un formulaire avec un bouton caché #}
+						{# <form action="{{ path('produit.delete', {id: product.id}) }}" method="post">
+							<input type="hidden" name="_method" value="DELETE">
+							<button type="submit">supprimer</button>
+						</form> #}
+{# 
+					</td>
+
+				</tr>
+
+			{% endfor %} #}
+		{# </tbody> #}
+	</table>
+
+
+	{# <style>
+	    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+	    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+	</style> #}
+
+	{# <div class="example-wrapper">
+	    <h1>Hello {{ controller_name }}! ✅</h1>
+	
+	    This friendly message is coming from:
+	    <ul>
+	        <li>Your controller at <code>C:/Users/ARAH/Desktop/Projet Stage/site e-commerce stage/SiteEcommerce/src/Controller/ProductController.php</code></li>
+	        <li>Your template at <code>C:/Users/ARAH/Desktop/Projet Stage/site e-commerce stage/SiteEcommerce/templates/product/index.html.twig</code></li>
+	    </ul>
+	</div> #}
+{% endblock %}
+

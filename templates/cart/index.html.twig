@@ -6,7 +6,19 @@
 {% block body %}
 	<h1>Mon Panier</h1>
 
-	{% if cart is null or cart.getCartItems is empty %}
+{% for product in products %}
+	<div>
+		<h2>{{ product.nom }}</h2>
+		<p>Prix:
+			{{ product.prixTTC }}</p>
+		<p>Poids:
+			{{ product.poids }}</p>
+		<a href="{{ path('cart_add_item', { productId: product.id }) }}">Ajouter au panier</a>
+	</div>
+{% endfor %}
+
+
+	{# {% if cart is null or cart.getCartItems is empty %}
 		<p>Votre panier est vide.</p>
 	{% else %}
 		<table>
@@ -32,6 +44,11 @@
 
 		<p>Total du panier :
 			{{ totalPrice }}</p>
-	{% endif %}
+	{% endif %} #}
 {% endblock %}
+
+
+
+
+
 

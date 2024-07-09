@@ -60,7 +60,7 @@ class Produits
         return $this->prixTTC;
     }
 
-    public function setPrixTTC(string $prixTTC): static
+    public function setPrixTTC(string $prixTTC): self
     {
         $this->prixTTC = $prixTTC;
 
@@ -72,7 +72,7 @@ class Produits
         return $this->poids;
     }
 
-    public function setPoids(string $poids): static
+    public function setPoids(string $poids): self
     {
         $this->poids = $poids;
 

@@ -17,6 +17,10 @@ class CartItem
     #[ORM\Column]
     private ?int $productId = null;
 
+    #[ORM\ManyToOne(targetEntity: Produits::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Produits $product = null;
+
     #[ORM\Column]
     private ?int $quantity = null;
 
@@ -107,6 +111,18 @@ class CartItem
     {
         $this->weight = $weight;
 
+        return $this;
+    }
+
+
+    public function getProduct(): ?Produits
+    {
+        return $this->product;
+    }
+
+    public function setProduct(?Produits $product): static
+    {
+        $this->product = $product;
         return $this;
     }
 }

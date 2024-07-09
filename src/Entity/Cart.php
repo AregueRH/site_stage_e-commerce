@@ -57,7 +57,12 @@ class Cart
     /**
      * @return Collection<int, CartItem>
      */
-    public function getCartItems(): Collection
+    // public function getCartItems(): Collection
+    // {
+    //     return $this->cartItems;
+    // }
+
+    public function getCartItem(): Collection
     {
         return $this->cartItems;
     }
@@ -91,5 +96,16 @@ class Cart
 
         return $this;
     }
+
+
+
+    /**
+     * @return Collection<int, CartItem>
+     */
+    public function getCartItems(): Collection
+    {
+        return $this->cartItems;
+    }
+
 }
 

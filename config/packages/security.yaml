@@ -42,6 +42,11 @@ security:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/accueil, roles: ROLE_USER }
         # - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
+          
+services:
+    App\Controller\CartController:
+        autowire: true
+        autoconfigure: true
 
 when@test:
     security:
