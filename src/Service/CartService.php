@@ -1,56 +1,72 @@
+<?php
+
 namespace App\Service;
 
 use App\Entity\Cart;
-use App\Entity\CartItem;
-use App\Entity\Product;
 use App\Entity\User;
+use App\Entity\CartItem;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 
 class CartService
 {
-    private $em;
-    private $session;
+    private $entityManager;
+    private $security;
 
-    public function __construct(EntityManagerInterface $em, SessionInterface $session)
+    public function __construct(EntityManagerInterface $entityManager, Security $security)
     {
-        $this->em = $em;
-        $this->session = $session;
+        $this->entityManager = $entityManager;
+        $this->security = $security;
     }
 
-    public function getCart(User $user): Cart
+    public function getCart(): ?Cart
     {
-        $cart = $this->em->getRepository(Cart::class)->findOneBy(['user' => $user]);
+        $user = $this->security->getUser();
+        if (!$user instanceof User) {
+            return null;
+        }
+
+        $cart = $this->entityManager->getRepository(Cart::class)->findOneBy(['user' => $user]);
+
         if (!$cart) {
             $cart = new Cart();
             $cart->setUser($user);
-            $this->em->persist($cart);
-            $this->em->flush();
+            $this->entityManager->persist($cart);
+            $this->entityManager->flush();
         }
 
         return $cart;
     }
 
-    public function addProductToCart(User $user, Product $product, int $quantity): void
+    public function addItemToCart(CartItem $item): void
     {
-        $cart = $this->getCart($user);
-        $item = $this->em->getRepository(CartItem::class)->findOneBy([
-            'cart' => $cart,
-            'product' => $product,
-        ]);
-
-        if ($item) {
-            $item->setQuantity($item->getQuantity() + $quantity);
-        } else {
-            $item = new CartItem();
-            $item->setCart($cart);
-            $item->setProduct($product);
-            $item->setQuantity($quantity);
-            $this->em->persist($item);
+        $cart = $this->getCart();
+        if ($cart) {
+            $cart->addCartItem($item);
+            $this->entityManager->persist($item);
+            $this->entityManager->flush();
         }
-
-        $this->em->flush();
     }
 
-    // Ajoutez d'autres méthodes comme removeProductFromCart, clearCart, etc.
+    public function removeItemFromCart(CartItem $item): void
+    {
+        $cart = $this->getCart();
+        if ($cart) {
+            $cart->removeCartItem($item);
+            $this->entityManager->remove($item);
+            $this->entityManager->flush();
+        }
+    }
+
+    public function clearCart(): void
+    {
+        $cart = $this->getCart();
+        if ($cart) {
+            foreach ($cart->getCartItems() as $item) {
+                $this->entityManager->remove($item);
+            }
+            $cart->clearCartItems();
+            $this->entityManager->flush();
+        }
+    }
 }

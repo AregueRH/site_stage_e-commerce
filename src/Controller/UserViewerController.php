@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class UserViewerController extends AbstractController
@@ -17,6 +18,8 @@ class UserViewerController extends AbstractController
     }
 
     #[Route('/user/viewer', name: 'app_user_viewer')]
+    #[IsGranted('ROLE_USER')]
+
     public function index(): Response
     {
         // Récupérer l'utilisateur connecté
