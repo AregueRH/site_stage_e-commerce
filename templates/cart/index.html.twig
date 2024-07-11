@@ -6,7 +6,7 @@
 {% block body %}
 	<h1>Mon Panier</h1>
 
-{% for product in products %}
+{# {% for product in products %}
 	<div>
 		<h2>{{ product.nom }}</h2>
 		<p>Prix:
@@ -15,40 +15,44 @@
 			{{ product.poids }}</p>
 		<a href="{{ path('cart_add_item', { productId: product.id }) }}">Ajouter au panier</a>
 	</div>
+{% endfor %} #}
+
+
+{% if products is empty %}
+	<p>Votre panier est vide.</p>
+{% else %}
+
+{% for item in productsWithQuantities %}
+{# {{ dump(item) }} #}
+
+	<div>
+		<h2>{{ item.product.nom }}</h2>
+		<p>Prix:
+			{{ item.product.prixTTC }}</p>
+		<p>Poids:
+			{{ item.product.poids }}</p>
+		<p>Quantité:
+			{{ item.quantity }}</p>
+		<a href="{{ path('cart_add_item', { productId: item.product.id }) }}">+1</a>
+		<a href="{{ path('cart_remove_item', { productId: item.product.id }) }}">-1</a>
+
+	</div>
 {% endfor %}
 
+	{# {% for product in products %}
+		<div>
+			<h2>{{ product.nom }}</h2>
+			<p>Prix:
+				{{ product.prixTTC }}</p>
+			<p>Poids:
+				{{ product.poids }}</p>
+			<p>Quantité:
+				{{ item.quantity }}</p>
 
-	{# {% if cart is null or cart.getCartItems is empty %}
-		<p>Votre panier est vide.</p>
-	{% else %}
-		<table>
-			<thead>
-				<tr>
-					<th>Produit</th>
-					<th>Quantité</th>
-					<th>Prix</th>
-					<th>Total</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for item in cart.getCartItems %}
-					<tr>
-						<td>{{ item.getProduct().getName() }}</td>
-						<td>{{ item.getQuantity() }}</td>
-						<td>{{ item.getProduct().getPrice() }}</td>
-						<td>{{ item.getQuantity() * item.getProduct().getPrice() }}</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+			<a href="{{ path('cart_add_item', { productId: product.id }) }}">Ajouter au panier</a>
+		</div>
+	{% endfor %} #}
+{% endif %}
 
-		<p>Total du panier :
-			{{ totalPrice }}</p>
-	{% endif %} #}
+
 {% endblock %}
-
-
-
-
-
-
