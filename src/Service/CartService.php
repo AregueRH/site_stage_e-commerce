@@ -58,6 +58,17 @@ class CartService
         }
     }
 
+    public function getCartTotal(Cart $cart): float
+    {
+        $total = 0;
+
+        foreach ($cart->getCartItems() as $cartItem) {
+            $total += $cartItem->getProduct()->getPrixTTC() * $cartItem->getQuantity();
+        }
+
+        return $total;
+    }
+
     public function clearCart(): void
     {
         $cart = $this->getCart();

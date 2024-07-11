@@ -61,6 +61,7 @@ class CartController extends AbstractController
 // $productsWithQuantities[] = ['product' => $product, 'quantity' => $item->getQuantity()]; : Crée un tableau associatif contenant chaque produit et sa quantité.
 
         $products = $this->entityManager->getRepository(Produits::class)->findBy(['id' => $productIds]);
+        $totalPrice = $this->cartService->getCartTotal($cart);
 
 // Utilise l'EntityManager pour récupérer les produits à partir de la base de données en utilisant les identifiants des produits collectés précédemment.
 
@@ -68,7 +69,7 @@ class CartController extends AbstractController
             'cart' => $cart,
             'products' => $products,
             'productsWithQuantities' => $productsWithQuantities,
-            // 'totalPrice' => $totalPrice,
+            'totalPrice' => $totalPrice,
         ]);
     }
 //  Rend la vue cart/index.html.twig avec les données du panier (le panier lui-même, les produits, les produits avec leurs quantités)
