@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche
+{% endblock %}
+
+{% block body %}
+	<h1>Recherche de produits</h1>
+
+	{{ form_start(form) }}
+	{{ form_widget(form.nom) }}
+	<button type="submit" class="btn btn-primary">Rechercher</button>
+	{{ form_end(form) }}
+
+	{% if produits is not empty %}
+		<h2>Résultats de recherche</h2>
+
+{% for produit in produits %}
+	<li>{{ produit.nom }}
+		<br>
+		{{ produit.marque }}
+		<br>
+		{{ produit.prixTTC }}
+		<br>
+		{{ produit.poids }}</li>
+		<br>
+		<br>
+{% endfor %}
+
+
+	{% else %}
+		<p>Aucun produit trouvé</p>
+	{% endif %}
+{% endblock %}
+
