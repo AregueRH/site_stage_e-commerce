@@ -1,37 +1,110 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon Panier
-{% endblock %}
-
 {% block body %}
+	<style>
+		.product-list {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 20px;
+			justify-content: center;
+			padding: 0;
+			list-style-type: none;
+			margin: 0 auto;
+		}
+
+		h1 {
+			margin: 0 auto;
+			flex: 1 1 200px;
+			max-width: 300px;
+			border: 2px solid #8B4513;
+			border-radius: 10px;
+			padding: 20px;
+			background-color: #fff;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+		}
+
+		.product-item {
+			margin: 30px auto;
+			flex: 1 1 200px;
+			max-width: 300px;
+			border: 2px solid #8B4513;
+			border-radius: 10px;
+			padding: 20px;
+			background-color: #fff;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+		}
+
+		.product-item h2 {
+			margin: 10px 0;
+		}
+
+		.product-item p {
+			margin: 10px 0;
+			font-size: 1.2em;
+			color: #555;
+		}
+
+		.product-item a {
+			margin-top: 10px;
+			padding: 10px 20px;
+			color: #fff;
+			background-color: #007bff;
+			text-decoration: none;
+			border-radius: 5px;
+			transition: background-color 0.3s ease;
+		}
+
+		.product-item a:hover {
+			background-color: #0056b3;
+		}
+		ul{
+			margin: 10px 0;
+
+		}
+		.total {
+			margin: 100px auto;
+			align-items: center;
+			text-align: center;
+			font-size: 40px;
+			background-color: #666;
+			width: 300px ;
+			border-radius: 1cap;
+
+		}
+	</style>
+
 	<h1>Mon Panier</h1>
 
-
-{% if products is empty %}
-	<p>Votre panier est vide.</p>
-{% else %}
-
-{% for item in productsWithQuantities %}
-{# {{ dump(item) }} #}
-
-	<div>
-		<h2>{{ item.product.nom }}</h2>
-		<p>Prix:
-			{{ item.product.prixTTC }}</p>
-		<p>Poids:
-			{{ item.product.poids }}</p>
-		<p>Quantité:
-			{{ item.quantity }}</p>
-		<a href="{{ path('cart_add_item', { productId: item.product.id }) }}">+1</a>
-		<a href="{{ path('cart_remove_item', { productId: item.product.id }) }}">-1</a>
-
-	</div>
-{% endfor %}
-<p>Total :
-	{{ totalPrice }}
-	€</p>
-
-{% endif %}
-
-
+	{% if products is empty %}
+		<p>Votre panier est vide.</p>
+	{% else %}
+		<ul class="product-list">
+			{% for item in productsWithQuantities %}
+				<li class="product-item">
+					<h2>{{ item.product.nom }}</h2>
+					<p>Prix:
+						{{ item.product.prixTTC }}
+						€</p>
+					<p>Quantité:
+						{{ item.quantity }}</p>
+					<a href="{{ path('cart_add_item', { productId: item.product.id }) }}">Ajouter au panier</a>
+					<a href="{{ path('cart_remove_item', { productId: item.product.id }) }}">Supprimer du panier</a>
+				</li>
+			{% endfor %}
+		</ul>
+		<div class="total">
+		<p>Total :
+			{{ totalPrice }}
+			€</p>
+		</div>
+	{% endif %}
 {% endblock %}
+
