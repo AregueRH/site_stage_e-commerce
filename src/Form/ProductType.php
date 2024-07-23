@@ -17,9 +17,6 @@ class ProductType extends AbstractType
             ->add('marque')
             ->add('prixTTC')
             ->add('poids')
-            ->add('save', SubmitType::class, [
-                'label' => 'Envoyer'
-            ])
         ;
     }
 

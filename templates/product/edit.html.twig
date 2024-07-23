@@ -3,9 +3,72 @@
 {% block title "modifier : " ~ produit.nom %}
 
 {% block body %}
-    <h1>Fiche produit pour : {{ produit.nom }}</h1>
 
-    {{ form(formProd) }}
+<style>
+	.register-container {
+		max-width: 400px; /* Largeur maximale du conteneur */
+		height: 600px;
+		margin: 5% auto; /* Centre horizontalement et ajoute un espace au-dessus */
+		padding: 20px;
+		border: 2px solid #8B4513; /* Couleur des contours bruns (sienne brune) */
+		border-radius: 10px; /* Coins arrondis */
+		background-color: #fff; /* Fond blanc */
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre pour l'effet de profondeur */
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 20px;
+	}
+	.register-container h1 {
+		gap: 20px;
+		margin-bottom: 20px; /* Espace en dessous du titre */
+		text-align: center; /* Centre le titre horizontalement */
+	}
+
+	.register-container .form-control {
+		width: 100%; /* Assure que les champs de formulaire prennent toute la largeur disponible */
+		margin-top: 10px; /* Espacement au-dessus des champs */
+	}
+
+	.register-container .btn {
+		margin-bottom: 20px; /* Espace en dessous du titre */
+		margin-top: 20px; /* Espace au-dessus du bouton */
+		width: 100%; /* Assure que le bouton prend toute la largeur disponible */
+	}
+
+	.register-container .form-check {
+		margin-top: 10px; /* Espacement au-dessus de la case à cocher */
+		text-align: center; /* Centre le contenu de la case à cocher horizontalement */
+	}
+	.login_link {
+		margin-top: 10px;
+		text-align: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 100%;
+		border-radius: 1cap;
+	}
+</style>
+
+<div class="register-container">
+    <h1>Modifier les informations produit </h1>
+
+        {{ form_start(formProd) }}
+        {{ form_row(formProd.nom, {label: 'Nom : '}) }}
+        <br>
+        {{ form_row(formProd.marque, {label: 'Marque : '}) }}
+        <br>
+        {{ form_row(formProd.prixTTC, {label: 'Prix TTC : '}) }}
+        <br>
+        {{ form_row(formProd.poids, {label: 'Poids : '}) }}
+        <br>
+        <button type="submit" class="btn btn-lg btn-primary">Modifier</button>
+        {{ form_end(formProd) }}
+</div>
+
 
     
 {% endblock %}

@@ -3,8 +3,62 @@
 {% block title "Ajouter un produit"%}
 
 {% block body %}
-    <h1>Créer un produit</h1>
+<style>
+	.register-container {
+		max-width: 400px; /* Largeur maximale du conteneur */
+		height: 500px;
+		margin: 5% auto; /* Centre horizontalement et ajoute un espace au-dessus */
+		padding: 20px;
+		border: 2px solid #8B4513; /* Couleur des contours bruns (sienne brune) */
+		border-radius: 10px; /* Coins arrondis */
+		background-color: #fff; /* Fond blanc */
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre pour l'effet de profondeur */
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 20px;
+	}
+.register-container h1 {
+        gap : 20px;
+        margin-bottom: 20px; /* Espace en dessous du titre */
+        text-align: center; /* Centre le titre horizontalement */
+}
 
-	{{ form(formProd) }}
+
+
+.register-container .btn {
+    margin-bottom: 20px; /* Espace en dessous du titre */
+    margin-top: 20px; /* Espace au-dessus du bouton */
+    width: 100%; /* Assure que le bouton prend toute la largeur disponible */
+}
+
+  
+   
+</style>
+
+<div class="register-container">
+	<h1>Ajouter un produit</h1>
+
+	{{ form_start(formProd) }}
+    {{ form_row(formProd.nom, {label: 'Nom : '}) }}
+    <br>
+    {{ form_row(formProd.marque, {label: 'Marque : '}) }}
+    <br>
+    {{ form_row(formProd.prixTTC, {label: 'Prix TTC : '}) }}
+    <br>
+    {{ form_row(formProd.poids, {label: 'Poids : '}) }}
+    <br>
+    <button type="submit" class="btn btn-lg btn-primary">Créer</button>
+{{ form_end(formProd) }}
+
+	
+	</a>
+</div>
+
+
+
+
+
 
 {% endblock %}

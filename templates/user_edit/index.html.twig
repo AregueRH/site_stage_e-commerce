@@ -4,17 +4,73 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Modifier les informations de mon profil</h1>
 
-	{{ form_start(form) }}
+	<style>
+		.register-container {
+			max-width: 400px;
+			height: auto; /* Ajuster la hauteur automatique pour le contenu */
+			margin: 5% auto;
+			padding: 20px;
+			border: 2px solid #8B4513;
+			border-radius: 10px;
+			background-color: #fff;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+		}
 
-	{{ form_row(form.username) }}
-	{{ form_row(form.email) }}
-	{{ form_row(form.plainPassword, {'label': 'Nouveau mot de passe (laisser vide si vous souhaitez conserver celui actuel)'}) }}
-    
+		.register-container h1 {
+			margin-bottom: 20px;
+			text-align: center;
+		}
 
-	<button class="btn">Enregistrer les modifications</button>
-	
-	{{ form_end(form) }}
+		.register-container .form-control {
+			width: 100%;
+			margin-top: 10px;
+		}
+
+		.register-container .btn {
+			margin-top: 20px;
+			width: 100%;
+		}
+
+		.register-container .form-check {
+			margin-top: 10px;
+			text-align: center;
+		}
+
+		.register-container .form-group {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+	</style>
+
+	<div class="register-container">
+		<h1>Modifier les informations de mon profil</h1>
+
+		{{ form_start(form) }}
+
+		<div class="form-group">
+			{{ form_row(form.username, {label: 'Identifiant : '}) }}
+		</div>
+<br>
+		<div class="form-group">
+			{{ form_row(form.email, {label: 'Email : '}) }}
+		</div>
+<br>
+		<div class="form-group">
+			{{ form_row(form.plainPassword, {'label': 'Nouveau mot de passe '}) }}
+		</div>
+<p>(laisser vide si vous souhaitez conserver celui actuel)</p>
+		<div class="form-group">
+			<button type="submit" class="btn btn-lg btn-primary">Enregistrer les modifications</button>
+		</div>
+
+		{{ form_end(form) }}
+	</div>
+
 {% endblock %}
 
