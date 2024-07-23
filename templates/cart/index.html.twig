@@ -6,17 +6,6 @@
 {% block body %}
 	<h1>Mon Panier</h1>
 
-{# {% for product in products %}
-	<div>
-		<h2>{{ product.nom }}</h2>
-		<p>Prix:
-			{{ product.prixTTC }}</p>
-		<p>Poids:
-			{{ product.poids }}</p>
-		<a href="{{ path('cart_add_item', { productId: product.id }) }}">Ajouter au panier</a>
-	</div>
-{% endfor %} #}
-
 
 {% if products is empty %}
 	<p>Votre panier est vide.</p>
@@ -42,19 +31,6 @@
 	{{ totalPrice }}
 	€</p>
 
-	{# {% for product in products %}
-		<div>
-			<h2>{{ product.nom }}</h2>
-			<p>Prix:
-				{{ product.prixTTC }}</p>
-			<p>Poids:
-				{{ product.poids }}</p>
-			<p>Quantité:
-				{{ item.quantity }}</p>
-
-			<a href="{{ path('cart_add_item', { productId: product.id }) }}">Ajouter au panier</a>
-		</div>
-	{% endfor %} #}
 {% endif %}
 
 
