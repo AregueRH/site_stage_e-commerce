@@ -1,19 +1,79 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Enregistrement{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+<style>
+    .register-container {
+        max-width: 400px; /* Largeur maximale du conteneur */
+        height: 600px ;
+        margin: 10% auto; /* Centre horizontalement et ajoute un espace au-dessus */
+        padding: 20px;
+        border: 2px solid #8B4513; /* Couleur des contours bruns (sienne brune) */
+        border-radius: 10px; /* Coins arrondis */
+        background-color: #fff; /* Fond blanc */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre pour l'effet de profondeur */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap : 20px;
+    }
+
+    .register-container h1 {
+        gap : 20px;
+        margin-bottom: 20px; /* Espace en dessous du titre */
+        text-align: center; /* Centre le titre horizontalement */
+    }
+
+    .register-container .form-control {
+        width: 100%; /* Assure que les champs de formulaire prennent toute la largeur disponible */
+        margin-top: 10px; /* Espacement au-dessus des champs */
+    }
+
+    .register-container .btn {
+        margin-bottom: 20px; /* Espace en dessous du titre */
+        margin-top: 20px; /* Espace au-dessus du bouton */
+        width: 100%; /* Assure que le bouton prend toute la largeur disponible */
+    }
+
+    .register-container .form-check {
+        margin-top: 10px; /* Espacement au-dessus de la case à cocher */
+        text-align: center; /* Centre le contenu de la case à cocher horizontalement */
+    }
+    .login_link {
+        margin-top : 10px ;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%; 
+        height: 100%; 
+        border-radius:1cap;
+    }
+</style>
+
+<div class="register-container">
+    <h1>Enregistrement</h1>
 
     {{ form_errors(registrationForm) }}
 
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
+        {{ form_row(registrationForm.username, {label : 'Identifiant :  '}) }}
+        <br>
+        {{ form_row(registrationForm.email, {label : 'Email : '})  }}
+        <br>
+
         {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
+            label: 'Mot de passe :  '
         }) }}
+        <br>
         {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="btn btn-lg btn-primary">S'enregistrer</button>
     {{ form_end(registrationForm) }}
+    <a href="{{ path('app_login') }}" >
+    <button class="login_link" type="button" >Déjà enregistré ? Connectez-vous</button>
+</a>
+</div>
 {% endblock %}
