@@ -86,8 +86,13 @@
 	<div class="search-container">
 		<h1>Recherche de produits</h1>
 		<div class="search_barre">
-			{{ form_start(form) }}
-			{{ form_widget(form.nom) }}
+
+
+{# Turbo Drive est un outil d'accélération des applications web. Il améliore la vitesse de navigation en remplaçant les chargements de pages entières par des chargements de fragments de page via Ajax. une fois activé, il peut intercepter les soumissions de formulaire et essayer de charger les résultats en Ajax plutôt que de recharger la page entière. Cela peut entraîner des problèmes si la réponse du formulaire #}
+{{ form_start(form, {'attr': {'data-turbo': 'false'}}) }} 
+{# on désactive le sata-turbo en cas de disfonctionnement. #}
+{{ form_widget(form.nom) }}
+
 			<button type="submit" class="btn btn-primary">Rechercher</button>
 			{{ form_end(form) }}
 		</div>
@@ -97,7 +102,7 @@
 		<div class="results-title">
 			<h2>Résultats de recherche</h2>
 		</div>
-
+  
 		<ul class="product-list">
 			{% for produit in produits %}
 				<li class="product-item">

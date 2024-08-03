@@ -24,7 +24,7 @@ class CartController extends AbstractController
         $this->entityManager = $em;
     }
 
-// une route de Symfony permettant d'afficher le panier d'un utilisateur authentifié, en récupérant les informations nécessaires depuis les services et la base de données, puis en les passant à la vue Twig pour le rendu final.
+// une route de Symfony permettant d'afficher le panier d'un utilisateur authentifié, en récupérant les infos nécessaires depuis les services et la base de données, puis en les passant à la vue Twig pour le rendu final.
 
     #[Route('/cart', name: 'cart_show')]
     #[IsGranted('ROLE_USER')]

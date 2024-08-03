@@ -20,7 +20,7 @@ class ProductController extends AbstractController
     
     public function indexList(EntityManagerInterface $em): Response
     {
-        // pour récupérer tout les produits
+        // $products récupére tout les elements issus de la classe Produits dans la BDD
         $products = $em->getRepository(Produits::class)->findAll();
         // dd($products);
         return $this->render('/product/list.html.twig', [
@@ -30,16 +30,12 @@ class ProductController extends AbstractController
     }
 
 
-
-
-
-
     #[Route('/products', name: 'products_list')]
     #[IsGranted('ROLE_ADMIN')]
     
     public function list(EntityManagerInterface $em): Response
     {
-        // pour récupérer tout les produits
+        // $products récupére tout les elements issus de la classe Produits dans la BDD
         $products = $em->getRepository(Produits::class)->findAll();
         
         return $this->render('product/index.html.twig', [
